@@ -1,5 +1,5 @@
 import { IStatus } from '../Types/status';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 export const getTime = (time: number) => {
   const milliSeconds = new Date(time);

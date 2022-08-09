@@ -18,6 +18,7 @@ You will also see any lint errors in the console.
 
 Runs the app in the development mode but in HTTPS protocol.\
 Open [https://localhost:3000](https://localhost:3000) to view it in the browser.
+But you have to create the files .pem with the name `local.secure-key.pem` and `local.secure.pem` or update in `package.json` the file name
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
