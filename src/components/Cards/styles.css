@@ -1,0 +1,26 @@
+.columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 10px;
+  column-gap: 5px;
+  place-items: center;
+
+}
+
+@media only screen and (min-width: 768px) {
+  .columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .columns {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .columns {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
