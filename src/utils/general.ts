@@ -41,7 +41,7 @@ const errorsHttp: httpsCodes = {
 
 export const getStatusOneEndPoint = async (apiName: string): Promise<IStatus> => {
   try {
-    const response = await fetch(`https://api.factoryfour.com/${apiName}/health/status`);
+    const response = await fetch(`/${apiName}/health/status`);
     if (response.ok) {
       const data = await response.json();
       return { apiName, ...data };
