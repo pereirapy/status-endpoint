@@ -1,4 +1,5 @@
 import { IStatus } from '../Types/status';
+import axios, { AxiosError } from 'axios';
 
 export const getTime = (time: number) => {
   const milliSeconds = new Date(time);
@@ -14,6 +15,7 @@ export const getTime = (time: number) => {
 type httpsCodes = { [cod: number]: string };
 
 const errorsHttp: httpsCodes = {
+  0: 'Error by CORS policy',
   302: 'Found',
   303: 'See other',
   304: 'Not Modified',
@@ -39,28 +41,19 @@ const errorsHttp: httpsCodes = {
   504: 'Gateway Timeout',
 };
 
+
 export const getStatusOneEndPoint = async (apiName: string): Promise<IStatus> => {
   try {
-    const response = await fetch(`https://api.factoryfour.com/${apiName}/health/status`);
-    if (response.ok) {
-      const data = await response.json();
-      return { apiName, ...data };
-    } else {
-      return {
-        apiName,
-        time: 0,
-        success: false,
-        errorCode: response.status,
-        message: errorsHttp[response.status] || 'Error when try to get data from api',
-      };
-    }
+    const { data } = await axios(`https://api.factoryfour.com/${apiName}/health/status`);
+    return { apiName, ...data };
   } catch (error: any) {
+
     return {
       apiName,
       time: 0,
       success: false,
-      errorCode: 500,
-      message: error?.message || 'Error Unknown',
+      errorCode: error.response.status,
+      message: error.response.status in errorsHttp ? errorsHttp[error.response.status] : error?.message || 'Error Unknown',
     };
   }
 };
